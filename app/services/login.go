@@ -32,8 +32,7 @@ func Login(r LoginRequest, db *gorm.DB) (LoginResponse, error) {
 		return LoginResponse{}, result
 	}
 
-	// TEMPORARILY THIS. HAHA DON"T DO THIS.
-	// i believe there are better ways on authentcating the user. I just don't have time to search for it
+	//there are better ways on authentcating the user. leaving this for now
 	user := models.User{}
 	db.Where("email = ?", r.Email).Find(&user)
 	if user.FirstName == "" {

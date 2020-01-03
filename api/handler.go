@@ -20,6 +20,7 @@ func Initialize(db *gorm.DB) *gin.Engine {
 	api := router.Group("/api/v1")
 	{
 		api.POST("/login", handlers.Login)
+		api.POST("/register", handlers.Register)
 
 		protectedRoutes := api.Group("")
 		{

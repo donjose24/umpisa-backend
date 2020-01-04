@@ -15,7 +15,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Failed to connect to database: %v", err.Error()))
 	}
-	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.User{}, &models.Transaction{})
 	router := api.Initialize(db)
 
 	router.Run()

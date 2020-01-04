@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hashicorp/go-multierror"
 	"github.com/jinzhu/gorm"
-	"github.com/jmramos02/smarty-seed-backend/app/services"
-	"github.com/jmramos02/smarty-seed-backend/app/utils"
+	"github.com/jmramos02/umpisa-backend/app/services"
+	"github.com/jmramos02/umpisa-backend/app/utils"
 )
 
 func Register(c *gin.Context) {

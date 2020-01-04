@@ -26,6 +26,7 @@ func Initialize(db *gorm.DB) *gin.Engine {
 		{
 			protectedRoutes.Use(authenticationMiddleware())
 			protectedRoutes.GET("/user", handlers.GetUser)
+			protectedRoutes.GET("/topup", handlers.Topup)
 		}
 	}
 

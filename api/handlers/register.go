@@ -23,7 +23,7 @@ func Register(c *gin.Context) {
 				return
 			}
 			c.JSON(400, gin.H{
-				"error": err.Error(),
+				"errors": err.Error(),
 			})
 			return
 		}

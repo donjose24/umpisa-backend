@@ -62,7 +62,7 @@ func Balance(request BalanceRequest, db *gorm.DB) (BalanceResponse, error) {
 
 func GetHistory(request BalanceRequest, db *gorm.DB) (Transactions, error) {
 	var transactions Transactions
-	db.Table("transactions").Where("user_id = ?", request.UserID).Scan(transactions)
+	db.Table("transactions").Where("user_id = ?", request.UserID).Find(transactions)
 
 	return transactions, nil
 }

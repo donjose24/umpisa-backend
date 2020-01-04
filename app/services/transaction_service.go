@@ -9,13 +9,17 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-type TransactionRequest struct {
+type BalanceRequest struct {
 	UserID uint `json:"user_id" validate:"required"`
-	Amount int  `json:"amount" validate:"required,min=200"`
 }
 
 type TransactionResponse struct {
 	Status string `json:"status"`
+}
+
+type TransactionRequest struct {
+	UserID uint `json:"user_id" validate:"required"`
+	Amount int  `json:"amount" validate:"required,min=200"`
 }
 
 type BalanceResponse struct {
@@ -45,7 +49,7 @@ func Topup(request TransactionRequest, db *gorm.DB) (TransactionResponse, error)
 	return TransactionResponse{Status: "ok"}, nil
 }
 
-func Balance(request TransactionRequest, db *gorm.DB) (BalanceResponse, error) {
+func Balance(request BalanceRequest, db *gorm.DB) (BalanceResponse, error) {
 	var balance BalanceResponse
 	db.Table("transactions").Select("sum(amount) as amount").Where("user_id = ?", request.UserID).Scan(&balance)
 

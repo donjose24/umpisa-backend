@@ -18,6 +18,10 @@ type TransactionResponse struct {
 	Status string `json:"status"`
 }
 
+type BalanceResponse struct {
+	Amount uint `json:"amount"`
+}
+
 func Topup(request TransactionRequest, db *gorm.DB) (TransactionResponse, error) {
 	v := validator.New()
 	err := v.Struct(request)
@@ -39,4 +43,11 @@ func Topup(request TransactionRequest, db *gorm.DB) (TransactionResponse, error)
 	db.Create(&transaction)
 
 	return TransactionResponse{Status: "ok"}, nil
+}
+
+func Balance(request TransactionRequest, db *gorm.DB) (BalanceResponse, error) {
+	var balance BalanceResponse
+	db.Table("transactions").Select("sum(amount) as amount").Where("user_id = ?", request.UserID).Scan(&balance)
+
+	return balance, nil
 }

@@ -58,7 +58,7 @@ func authenticationMiddleware() gin.HandlerFunc {
 		user, err := services.DecodeUserInfo(reqToken)
 		if err != nil {
 			c.JSON(401, gin.H{
-				"error": err.Error(),
+				"errors": err.Error(),
 			})
 			c.Abort()
 			return

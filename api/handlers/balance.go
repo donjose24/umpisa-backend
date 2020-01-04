@@ -10,13 +10,7 @@ import (
 func GetUserBalance(c *gin.Context) {
 	var request services.TransactionRequest
 	userContext, _ := c.Get("user")
-	user, success := userContext.(models.User)
-
-	if !success {
-		c.JSON(401, gin.H{
-			"errors": "Unauthorized",
-		})
-	}
+	user, _ := userContext.(models.User)
 
 	db, _ := c.Get("db")
 	request.UserID = user.ID

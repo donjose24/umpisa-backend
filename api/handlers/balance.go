@@ -8,14 +8,14 @@ import (
 )
 
 func GetUserBalance(c *gin.Context) {
-	var request services.TransactionRequest
+	var request services.BalanceRequest
 	userContext, _ := c.Get("user")
 	user, _ := userContext.(models.User)
 
 	db, _ := c.Get("db")
 	request.UserID = user.ID
 	if dbObj, success := db.(*gorm.DB); success {
-		response, _ := services.Topup(request, dbObj)
+		response, _ := services.Balance(request, dbObj)
 		c.JSON(200, gin.H{
 			"data": response,
 		})

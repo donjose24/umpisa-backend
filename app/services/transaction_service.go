@@ -26,6 +26,10 @@ type BalanceResponse struct {
 	Amount uint `json:"amount"`
 }
 
+type Transactions struct {
+	Transactions []models.Transaction `json:"transactions"`
+}
+
 func Topup(request TransactionRequest, db *gorm.DB) (TransactionResponse, error) {
 	v := validator.New()
 	err := v.Struct(request)
@@ -54,4 +58,11 @@ func Balance(request BalanceRequest, db *gorm.DB) (BalanceResponse, error) {
 	db.Table("transactions").Select("sum(amount) as amount").Where("user_id = ?", request.UserID).Scan(&balance)
 
 	return balance, nil
+}
+
+func GetHistory(request BalanceRequest, db *gorm.DB) (Transactions, error) {
+	var transactions Transactions
+	db.Table("transactions").Where("user_id = ?", request.UserID).Scan(transactions)
+
+	return transactions, nil
 }

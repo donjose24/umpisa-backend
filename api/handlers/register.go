@@ -18,7 +18,7 @@ func Register(c *gin.Context) {
 			if merr, ok := err.(*multierror.Error); ok {
 				errors := utils.ExtractErrorMessages(merr.Errors)
 				c.JSON(400, gin.H{
-					"error": errors,
+					"errors": errors,
 				})
 				return
 			}
